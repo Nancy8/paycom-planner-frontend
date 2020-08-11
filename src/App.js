@@ -14,6 +14,8 @@ import LoginPopUp from "./components/LoginPopUp";
 import LogoutPopUp from "./components/LogoutPopUp";
 import axios from "axios";
 
+
+// I love emotion!
 const Title = styled.h1`
   color: #e4e4e4;
 `;
@@ -29,8 +31,14 @@ const ButtonWrap = styled.div`
 
 function App() {
   const { isNewEventPopUpOpen, isEventPopUpOpen, setEventsData } = useContext(EventContexts);
+  //it looks like isLoginPopUpOpen is never used in this component
   const { isLoginPopUpOpen, openLoginPopUp, openLogoutPopUp, getEmail, email, isLogoutPopUpOpen } = useContext(LoginContext);
   const [ isLoaded, setIsLoaded] = useState(false);
+
+
+  //since you are checking for the existence of email in multiple places, I would recommend making is a constant to use
+  const isEmailSet = (email !== "");
+
   
   useEffect(() => {   
     if(!isLoaded){
@@ -47,14 +55,14 @@ function App() {
     <div className="App">
       <Title>Paycom Project Planner</Title>
       <ButtonWrap>
-        <Button onClick={email === "" ? openLoginPopUp : openLogoutPopUp} className="login" variant="success">
-          {email !== "" ? "Logged in as: " + email : "Log In" }
+        <Button onClick={!isEmailSet ? openLoginPopUp : openLogoutPopUp} className="login" variant="success">
+          {isEmailSet ? "Logged in as: " + email : "Log In" }
         </Button>
         
       </ButtonWrap>
       
       <MonthCalendar />
-      <div>{email === "" ? <LoginPopUp /> : null}</div>
+      <div>{!isEmailSet ? <LoginPopUp /> : null}</div>
       <div>{isLogoutPopUpOpen ? <LogoutPopUp /> : null}</div>
       <div>{isNewEventPopUpOpen ? <NewEventPopUp /> : null}</div>
       <div>{isEventPopUpOpen ? <CurrentEventPopUp /> : null}</div>

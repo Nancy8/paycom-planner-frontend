@@ -7,6 +7,7 @@ const Td = styled.td`
   font-size: calc(6px + 0.5vw);
 `;
 
+// GrayBox is defined but not used
 const GrayBox = styled.div`
   height: 12vh;
   width: 100%;
@@ -25,4 +26,5 @@ const Day = React.memo(({ date }) => {
   );
 });
 
+// Usually the component name matches the name of the file.  I am kind of surprised React let this fly!
 export default Day;

@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Day from "./MonthCalendarDay";
 import styled from "@emotion/styled";
 import { EventContexts } from "./EventContexts";
+// Is SimpleMenu used?
 import SimpleMenu from "./SimpleMenu";
 
 
@@ -67,6 +68,7 @@ const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 const MonthCalendar = React.memo(() => {
   const { month, setMonth, year, setYear } = useContext(EventContexts);
+  // I am wondering if month needs to be a shared variable?  It looks like it is only used in this component.  But I might be missing something.
 
   function subtractMonth(){
     if(month === 0){
@@ -84,10 +86,15 @@ const MonthCalendar = React.memo(() => {
       setMonth(month +1)
     }
   }
+
+  // Javascript already has a getDate method.  You might want to name this something different to avoid confusion
+  // Actually, not sure I completely understand what is going on with this function
   function getDate(y, m, d){
     let firstDay = new Date(y, m, 1);
     let lastDay = new Date(y, m + 1, 0);
     let prevMonthLastDay = new Date(y, m, 0);
+    // firstDay is hardcoded to the first day of the month (line 93).  So firstDay.getDay() will always be 1, won't it?
+    // isn't this line the same as if(1 > d) == will this ever happen?
     if(firstDay.getDay() > d){
       m--;
       if(m === -1){

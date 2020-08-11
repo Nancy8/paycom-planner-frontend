@@ -94,6 +94,7 @@ export default function CurrentEventPopUp() {
         <h2>{eventName}</h2>
         <CenterBox>
           <h6>{"Time: " + eventDate.toLocaleString()}</h6>
+          {/* similar to App.js, you can define a const with email === eventsData[eventId].user and reference the const */}
           {email === eventsData[eventId].user ? 
             <h6>Attendees: {JSON.parse(eventsData[eventId].attendees).length}</h6>
             : null}

@@ -55,6 +55,7 @@ const Label = styled.label`
 
 export default function LoginPopUp() {
   const { setIsLoginPopUpOpen, handleLoginData, handleSignup, setEmail: setUserEmail } = useContext(LoginContext);
+  //not sure why you are not using the email from the Context here.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passCheckFailed, setPassCheckFailed] = useState(false);
@@ -91,6 +92,7 @@ export default function LoginPopUp() {
       });
   }
 
+  // it looks like exitPopup is never used
   function exitPopUp(){
     setIsLoginPopUpOpen(false);
     setPassCheckFailed(false);
